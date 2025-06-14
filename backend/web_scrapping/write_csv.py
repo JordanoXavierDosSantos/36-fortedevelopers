@@ -2,7 +2,7 @@ import sqlite3
 import csv, os
 
 
-def salvar_imoveis_em_csv(lista_imoveis, nome_arquivo='imoveis.csv'):
+def salvar_imoveis_em_csv(lista_imoveis, nome_arquivo='dataset_imoveis.csv'):
 
     arquivo_existe = os.path.exists(nome_arquivo)
     escrever_header = not arquivo_existe or os.stat(nome_arquivo).st_size == 0
