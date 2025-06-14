@@ -30,7 +30,7 @@ const AuthPage = () => {
       await login(email, password);
       toast({
         title: "Login realizado com sucesso!",
-        description: "Bem-vindo ao IntelliEstate",
+        description: "Bem-vindo ao PrecifAI",
       });
     } catch (error) {
       toast({
@@ -81,7 +81,7 @@ const AuthPage = () => {
             <div className="h-12 w-12 bg-primary rounded-xl flex items-center justify-center">
               <Building2 className="h-7 w-7 text-white" />
             </div>
-            <h1 className="text-3xl font-bold gradient-text">IntelliEstate</h1>
+            <h1 className="text-3xl font-bold gradient-text">PrecifiIA</h1>
           </div>
           <p className="text-muted-foreground">
             Inteligência imobiliária de ponta

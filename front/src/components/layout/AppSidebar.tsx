@@ -10,7 +10,7 @@ import {
   SidebarMenuItem,
   SidebarHeader,
 } from "@/components/ui/sidebar";
-import { BarChart3, Calculator, TrendingUp, History, Home, PlusCircle } from "lucide-react";
+import { Calculator, TrendingUp, History, Home, PlusCircle, House } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 
 const menuItems = [
@@ -47,14 +47,10 @@ export function AppSidebar() {
   return (
     <Sidebar className="border-r border-white/10 bg-black/40 backdrop-blur-sm">
       <SidebarHeader className="p-6 border-b border-white/10">
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 bg-primary rounded-lg flex items-center justify-center">
-            <BarChart3 className="h-5 w-5 text-white" />
+          <div className="font-bold text-lg gradient-text" style={{fontSize: 30}}>
+            PrecifAI
           </div>
-          <div className="font-bold text-lg gradient-text">
-            IntelliEstate
-          </div>
-        </div>
+
       </SidebarHeader>
       
       <SidebarContent className="p-4">

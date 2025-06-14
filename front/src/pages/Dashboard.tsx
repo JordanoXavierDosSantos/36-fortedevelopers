@@ -9,7 +9,7 @@ const Dashboard = () => {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold text-foreground">Bem-vindo ao IntelliEstate</h1>
+        <h1 className="text-4xl font-bold text-foreground">Bem-vindo ao PrecifAI</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Plataforma inteligente para análise e gestão do mercado imobiliário
         </p>

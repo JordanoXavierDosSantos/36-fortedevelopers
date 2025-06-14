@@ -13,7 +13,7 @@ const MainLayout = () => {
           <div className="flex items-center gap-4">
             <SidebarTrigger className="text-white hover:text-primary" />
             <div className="text-xl font-bold gradient-text">
-              IntelliEstate
+              PrecifAI
             </div>
           </div>
         </header>
