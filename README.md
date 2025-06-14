@@ -30,14 +30,14 @@ A solução utiliza **modelos de regressão linear** treinados com dados coletad
 Funcionalidades principais:
 
 - **Web Scraping:** Coleta de dados de imóveis do portal Zap Imóveis para criar um dataset.
-- **API de Previsão de Preço:** Desenvolvida em Python com FastAPI.
+- **API de Previsão de Preço:** Desenvolvida em Python com FastAPI, utiliza modelos de IA para prever o preço de imóveis com base em suas características.
 - **Frontend Web:** Interface simples e intuitiva para entrada dos dados do imóvel e visualização do preço sugerido.
 
 ## Tecnologias utilizadas
 
 - **Python 3.8+**
   - FastAPI
-  - scikit-learn
+  - scikit-learn (para modelos de IA)
   - pandas
   - numpy
 - **Node.js 18+**
