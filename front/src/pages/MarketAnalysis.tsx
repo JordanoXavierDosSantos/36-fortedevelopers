@@ -151,7 +151,7 @@ const MarketAnalysis = () => {
                   </div>
                   <div className="w-full bg-muted/30 rounded-full h-2">
                     <div 
-                      className="bg-gradient-to-r from-primary to-orange-400 h-2 rounded-full transition-all duration-500"
+                      className="bg-gradient-to-r from-primary to-blue-400 h-2 rounded-full transition-all duration-500"
                       style={{ width: `${range.percentage}%` }}
                     />
                   </div>
@@ -221,7 +221,7 @@ const MarketAnalysis = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center bg-gradient-to-br from-primary/10 to-orange-400/10 rounded-lg border border-white/10">
+            <div className="h-64 flex items-center justify-center bg-gradient-to-br from-primary/10 to-blue-400/10 rounded-lg border border-white/10">
               <div className="text-center">
                 <BarChart3 className="h-12 w-12 text-primary mx-auto mb-4" />
                 <p className="text-muted-foreground">Gráfico de linha temporal</p>
@@ -244,7 +244,7 @@ const MarketAnalysis = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center bg-gradient-to-br from-primary/10 to-orange-400/10 rounded-lg border border-white/10">
+            <div className="h-64 flex items-center justify-center bg-gradient-to-br from-primary/10 to-blue-400/10 rounded-lg border border-white/10">
               <div className="text-center">
                 <Calendar className="h-12 w-12 text-primary mx-auto mb-4" />
                 <p className="text-muted-foreground">Análise sazonal</p>
