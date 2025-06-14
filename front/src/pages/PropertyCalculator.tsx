@@ -38,17 +38,12 @@ const PropertyCalculator = () => {
   const [rentResult, setRentResult] = useState(null);
 
   const calculateSalePrice = async () => {
-    const area = parseFloat(saleData.area);
-    const neighborhood = saleData.neighborhood;
-
     const payload = {
-      area,
+      area: parseFloat(saleData.area),
       quartos: Number(saleData.bedrooms),
       banheiros: Number(saleData.bathrooms),
       garagem: Number(saleData.parking),
     };
-
-    console.log('Estrutura enviada para API (venda):', payload);
 
     try {
       const response = await fetch('http://localhost:8000/prever_preco', {
