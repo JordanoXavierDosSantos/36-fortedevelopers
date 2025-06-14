@@ -40,7 +40,16 @@ const PropertyCalculator = () => {
   const calculateSalePrice = () => {
     const area = parseFloat(saleData.area);
     const neighborhood = saleData.neighborhood;
-    
+
+    console.log('Estrutura enviada para API (venda):', {
+      ...saleData,
+      area: area,
+      bedrooms: Number(saleData.bedrooms),
+      bathrooms: Number(saleData.bathrooms),
+      parking: Number(saleData.parking),
+      type: 'sale'
+    });
+
     if (!area || !neighborhood) {
       toast({
         title: "Erro na calculadora",
@@ -50,17 +59,16 @@ const PropertyCalculator = () => {
       return;
     }
 
-    // Mock calculation algorithm
-    let basePrice = 8500 * area; // Base price per sqm
+    let basePrice = 8500 * area; 
     
-    // Adjustments based on property features
+
     const bedroomMultiplier = Math.max(1, parseInt(saleData.bedrooms || '0') * 0.1);
     const bathroomMultiplier = Math.max(1, parseInt(saleData.bathrooms || '0') * 0.05);
     const parkingMultiplier = Math.max(1, parseInt(saleData.parking || '0') * 0.08);
     
     basePrice *= (1 + bedroomMultiplier + bathroomMultiplier + parkingMultiplier);
     
-    // Condition adjustment
+
     if (saleData.condition === 'new') basePrice *= 1.15;
     else if (saleData.condition === 'renovated') basePrice *= 1.08;
     else if (saleData.condition === 'needs-renovation') basePrice *= 0.85;
@@ -95,9 +103,9 @@ const PropertyCalculator = () => {
       return;
     }
 
-    // Mock rent calculation
+  
     const salePrice = 8500 * area;
-    const monthlyRent = salePrice * 0.006; // 0.6% per month
+    const monthlyRent = salePrice * 0.006; 
     const annualRent = monthlyRent * 12;
     const yieldRate = (annualRent / salePrice) * 100;
     
@@ -155,7 +163,6 @@ const PropertyCalculator = () => {
               </CardContent>
             </Card>
 
-            {/* Sale Results */}
             <Card className="glass-card border-white/10">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
@@ -195,16 +202,8 @@ const PropertyCalculator = () => {
                     
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-sm text-muted-foreground">Preço por m²:</span>
-                        <span className="text-sm font-medium text-foreground">
-                          {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(saleResult.pricePerSqm)}
-                        </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-sm text-muted-foreground">Confiança:</span>
-                        <span className="text-sm font-medium text-green-500">
-                          {saleResult.confidence}%
-                        </span>
                       </div>
                     </div>
                   </div>
@@ -223,7 +222,6 @@ const PropertyCalculator = () => {
 
         <TabsContent value="rent" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Rent Input Form */}
             <Card className="glass-card border-white/10">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
@@ -241,8 +239,6 @@ const PropertyCalculator = () => {
                 </Button>
               </CardContent>
             </Card>
-
-            {/* Rent Results */}
             <Card className="glass-card border-white/10">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
