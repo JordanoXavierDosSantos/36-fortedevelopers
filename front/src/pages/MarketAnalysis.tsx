@@ -57,11 +57,14 @@ const priceChartData = {
     {
       label: 'Preço médio do m² (R$)',
       data: mockPrices,
+      borderColor: '#3b82f6',    
+      backgroundColor: '#3b82f6', 
       borderWidth: 2,
       tension: 0.35
     }
   ]
-}
+};
+
 const priceChartOptions = {
   responsive: true,
   plugins: {
@@ -78,11 +81,13 @@ const priceChartOptions = {
   scales: {
     y: {
       ticks: {
-        callback: (v: unknown) => `R$ ${(v as number).toLocaleString('pt-BR')}`
+        callback: (v: unknown) =>
+          `R$ ${(v as number).toLocaleString('pt-BR')}`
       }
     }
   }
-}
+};
+
 
 const monthLabels = [
   'Jan',
