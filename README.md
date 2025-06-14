@@ -9,8 +9,9 @@ Abra **2 terminais** e execute os comandos abaixo:
 No segundo terminal:
 
 ```sh
+cd backend
 pip install fastapi uvicorn scikit-learn pandas numpy
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 ### 2. Subir o frontend
@@ -18,7 +19,7 @@ uvicorn main:app --reload
 No terceiro terminal:
 
 ```sh
-cd frontend
+cd front
 yarn
 yarn dev
 ```
