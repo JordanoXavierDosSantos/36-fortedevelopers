@@ -1,66 +1,239 @@
+import { useState } from 'react'
+import dayjs from 'dayjs'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from '@/components/ui/card'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
+import {
+  TrendingUp,
+  TrendingDown,
+  BarChart3,
+  PieChart,
+  MapPin,
+  Calendar
+} from 'lucide-react'
+import { Line, Chart } from 'react-chartjs-2'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Tooltip,
+  Legend
+} from 'chart.js'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { TrendingUp, TrendingDown, BarChart3, PieChart, MapPin, Calendar } from 'lucide-react';
-import { useState } from 'react';
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Tooltip,
+  Legend
+)
+
+const monthsBack = 12
+const priceLabels = Array.from({ length: monthsBack }, (_, i) =>
+  dayjs().subtract(monthsBack - i - 1, 'month').format('MMM/YY')
+)
+const mockPrices = priceLabels.map(
+  (_, i) => 8500 + Math.sin(i / 1.7) * 650 + Math.random() * 300
+)
+const priceChartData = {
+  labels: priceLabels,
+  datasets: [
+    {
+      label: 'Preço médio do m² (R$)',
+      data: mockPrices,
+      borderWidth: 2,
+      tension: 0.35
+    }
+  ]
+}
+const priceChartOptions = {
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      callbacks: {
+        label: (ctx: import('chart.js').TooltipItem<'line'>) =>
+          `R$ ${ctx.parsed.y.toLocaleString('pt-BR', {
+            minimumFractionDigits: 2
+          })}`
+      }
+    }
+  },
+  scales: {
+    y: {
+      ticks: {
+        callback: (v: unknown) => `R$ ${(v as number).toLocaleString('pt-BR')}`
+      }
+    }
+  }
+}
+
+const monthLabels = [
+  'Jan',
+  'Fev',
+  'Mar',
+  'Abr',
+  'Mai',
+  'Jun',
+  'Jul',
+  'Ago',
+  'Set',
+  'Out',
+  'Nov',
+  'Dez'
+]
+const monthlySales = [80, 70, 100, 110, 130, 140, 120, 115, 150, 160, 170, 190]
+const monthlyPrices = [
+  8300, 8350, 8450, 8600, 8700, 8800, 8950, 9000, 9150, 9300, 9450, 9600
+]
+const seasonChartData = {
+  labels: monthLabels,
+  datasets: [
+    {
+      type: 'bar' as const,
+      label: 'Unidades vendidas',
+      data: monthlySales,
+      backgroundColor: 'rgba(99,102,241,0.6)',
+      yAxisID: 'y'
+    },
+    {
+      type: 'line' as const,
+      label: 'Preço médio (R$)',
+      data: monthlyPrices,
+      borderWidth: 2,
+      tension: 0.35,
+      yAxisID: 'y1'
+    }
+  ]
+}
+const seasonChartOptions = {
+  responsive: true,
+  plugins: { legend: { display: false } },
+  scales: {
+    y: { 
+      type: 'linear' as const,
+      beginAtZero: true, 
+      position: 'left' as const 
+    },
+    y1: {
+      type: 'linear' as const,
+      beginAtZero: false,
+      position: 'right' as const,
+      grid: { drawOnChartArea: false },
+      ticks: {
+        callback: (v: unknown) =>
+          `R$ ${(v as number).toLocaleString('pt-BR')}`
+      }
+    }
+  }
+}
 
 const MarketAnalysis = () => {
-  const [selectedRegion, setSelectedRegion] = useState('sao-paulo');
-  const [selectedPeriod, setSelectedPeriod] = useState('12m');
+  const [selectedRegion, setSelectedRegion] = useState('sao-paulo')
+  const [selectedPeriod, setSelectedPeriod] = useState('12m')
 
   const marketIndicators = [
     {
-      name: "Índice de Liquidez",
-      value: "7.2",
-      change: "+0.8",
-      trend: "up",
-      description: "Velocidade de vendas"
+      name: 'Índice de Liquidez',
+      value: '7.2',
+      change: '+0.8',
+      trend: 'up',
+      description: 'Velocidade de vendas'
     },
     {
-      name: "Taxa de Absorção",
-      value: "78%",
-      change: "+12%",
-      trend: "up", 
-      description: "Unidades vendidas/ofertadas"
+      name: 'Taxa de Absorção',
+      value: '78%',
+      change: '+12%',
+      trend: 'up',
+      description: 'Unidades vendidas/ofertadas'
     },
     {
-      name: "Yield Médio",
-      value: "6.8%",
-      change: "-0.3%",
-      trend: "down",
-      description: "Rentabilidade anual"
+      name: 'Yield Médio',
+      value: '6.8%',
+      change: '-0.3%',
+      trend: 'down',
+      description: 'Rentabilidade anual'
     },
     {
-      name: "Índice de Valorização",
-      value: "112.5",
-      change: "+5.2",
-      trend: "up",
-      description: "Base 100 = Jan/2023"
+      name: 'Índice de Valorização',
+      value: '112.5',
+      change: '+5.2',
+      trend: 'up',
+      description: 'Base 100 = Jan/2023'
     }
-  ];
+  ]
 
   const priceRanges = [
-    { range: "Até R$ 500K", percentage: 32, count: 892 },
-    { range: "R$ 500K - R$ 1M", percentage: 28, count: 781 },
-    { range: "R$ 1M - R$ 2M", percentage: 25, count: 697 },
-    { range: "R$ 2M - R$ 5M", percentage: 12, count: 334 },
-    { range: "Acima R$ 5M", percentage: 3, count: 83 }
-  ];
+    { range: 'Até R$ 500K', percentage: 32, count: 892 },
+    { range: 'R$ 500K - R$ 1M', percentage: 28, count: 781 },
+    { range: 'R$ 1M - R$ 2M', percentage: 25, count: 697 },
+    { range: 'R$ 2M - R$ 5M', percentage: 12, count: 334 },
+    { range: 'Acima R$ 5M', percentage: 3, count: 83 }
+  ]
 
   const neighborhoods = [
-    { name: "Vila Olímpia", avgPrice: "R$ 12.500", volume: 234, trend: "up", change: "+8.2%" },
-    { name: "Jardins", avgPrice: "R$ 15.200", volume: 189, trend: "up", change: "+3.1%" },
-    { name: "Moema", avgPrice: "R$ 9.800", volume: 312, trend: "down", change: "-2.5%" },
-    { name: "Brooklin", avgPrice: "R$ 8.900", volume: 278, trend: "up", change: "+12.3%" },
-    { name: "Pinheiros", avgPrice: "R$ 11.400", volume: 198, trend: "up", change: "+5.7%" },
-    { name: "Itaim Bibi", avgPrice: "R$ 13.100", volume: 167, trend: "up", change: "+6.8%" }
-  ];
+    {
+      name: 'Vila Olímpia',
+      avgPrice: 'R$ 12.500',
+      volume: 234,
+      trend: 'up',
+      change: '+8.2%'
+    },
+    {
+      name: 'Jardins',
+      avgPrice: 'R$ 15.200',
+      volume: 189,
+      trend: 'up',
+      change: '+3.1%'
+    },
+    {
+      name: 'Moema',
+      avgPrice: 'R$ 9.800',
+      volume: 312,
+      trend: 'down',
+      change: '-2.5%'
+    },
+    {
+      name: 'Brooklin',
+      avgPrice: 'R$ 8.900',
+      volume: 278,
+      trend: 'up',
+      change: '+12.3%'
+    },
+    {
+      name: 'Pinheiros',
+      avgPrice: 'R$ 11.400',
+      volume: 198,
+      trend: 'up',
+      change: '+5.7%'
+    },
+    {
+      name: 'Itaim Bibi',
+      avgPrice: 'R$ 13.100',
+      volume: 167,
+      trend: 'up',
+      change: '+6.8%'
+    }
+  ]
 
   return (
     <div className="p-6 space-y-6">
-      {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-foreground">Análise de Mercado</h1>
@@ -93,10 +266,9 @@ const MarketAnalysis = () => {
         </div>
       </div>
 
-      {/* Market Indicators */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {marketIndicators.map((indicator, index) => (
-          <Card key={index} className="glass-card border-white/10 hover-lift">
+        {marketIndicators.map((indicator, idx) => (
+          <Card key={idx} className="glass-card border-white/10 hover-lift">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium text-muted-foreground">
                 {indicator.name}
@@ -106,17 +278,19 @@ const MarketAnalysis = () => {
               <div className="text-2xl font-bold text-foreground mb-1">
                 {indicator.value}
               </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-1">
-                  {indicator.trend === 'up' ? (
-                    <TrendingUp className="h-3 w-3 text-green-500" />
-                  ) : (
-                    <TrendingDown className="h-3 w-3 text-red-500" />
-                  )}
-                  <span className={`text-xs ${indicator.trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
-                    {indicator.change}
-                  </span>
-                </div>
+              <div className="flex items-center space-x-1">
+                {indicator.trend === 'up' ? (
+                  <TrendingUp className="h-3 w-3 text-green-500" />
+                ) : (
+                  <TrendingDown className="h-3 w-3 text-red-500" />
+                )}
+                <span
+                  className={`text-xs ${
+                    indicator.trend === 'up' ? 'text-green-500' : 'text-red-500'
+                  }`}
+                >
+                  {indicator.change}
+                </span>
               </div>
               <p className="text-xs text-muted-foreground mt-2">
                 {indicator.description}
@@ -127,7 +301,6 @@ const MarketAnalysis = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Price Distribution */}
         <Card className="glass-card border-white/10">
           <CardHeader>
             <CardTitle className="text-foreground flex items-center gap-2">
@@ -140,17 +313,21 @@ const MarketAnalysis = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {priceRanges.map((range, index) => (
-                <div key={index} className="space-y-2">
+              {priceRanges.map((range, idx) => (
+                <div key={idx} className="space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-foreground">{range.range}</span>
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-primary">{range.percentage}%</span>
-                      <span className="text-xs text-muted-foreground">({range.count})</span>
+                      <span className="text-sm font-medium text-primary">
+                        {range.percentage}%
+                      </span>
+                      <span className="text-xs text-muted-foreground">
+                        ({range.count})
+                      </span>
                     </div>
                   </div>
                   <div className="w-full bg-muted/30 rounded-full h-2">
-                    <div 
+                    <div
                       className="bg-gradient-to-r from-primary to-orange-400 h-2 rounded-full transition-all duration-500"
                       style={{ width: `${range.percentage}%` }}
                     />
@@ -161,7 +338,6 @@ const MarketAnalysis = () => {
           </CardContent>
         </Card>
 
-        {/* Neighborhood Analysis */}
         <Card className="glass-card border-white/10">
           <CardHeader>
             <CardTitle className="text-foreground flex items-center gap-2">
@@ -174,29 +350,38 @@ const MarketAnalysis = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {neighborhoods.map((neighborhood, index) => (
-                <div key={index} className="p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors">
+              {neighborhoods.map((nh, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 rounded-lg bg-white/5 hover:bg-white/10 transition-colors"
+                >
                   <div className="flex justify-between items-center">
                     <div className="flex-1">
                       <div className="font-medium text-foreground text-sm">
-                        {neighborhood.name}
+                        {nh.name}
                       </div>
                       <div className="text-xs text-muted-foreground">
-                        {neighborhood.volume} unidades
+                        {nh.volume} unidades
                       </div>
                     </div>
                     <div className="text-right">
                       <div className="font-medium text-foreground text-sm">
-                        {neighborhood.avgPrice}/m²
+                        {nh.avgPrice}/m²
                       </div>
                       <div className="flex items-center justify-end space-x-1">
-                        {neighborhood.trend === 'up' ? (
+                        {nh.trend === 'up' ? (
                           <TrendingUp className="h-3 w-3 text-green-500" />
                         ) : (
                           <TrendingDown className="h-3 w-3 text-red-500" />
                         )}
-                        <span className={`text-xs ${neighborhood.trend === 'up' ? 'text-green-500' : 'text-red-500'}`}>
-                          {neighborhood.change}
+                        <span
+                          className={`text-xs ${
+                            nh.trend === 'up'
+                              ? 'text-green-500'
+                              : 'text-red-500'
+                          }`}
+                        >
+                          {nh.change}
                         </span>
                       </div>
                     </div>
@@ -208,7 +393,6 @@ const MarketAnalysis = () => {
         </Card>
       </div>
 
-      {/* Charts Placeholder */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <Card className="glass-card border-white/10">
           <CardHeader>
@@ -221,14 +405,8 @@ const MarketAnalysis = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center bg-gradient-to-br from-primary/10 to-orange-400/10 rounded-lg border border-white/10">
-              <div className="text-center">
-                <BarChart3 className="h-12 w-12 text-primary mx-auto mb-4" />
-                <p className="text-muted-foreground">Gráfico de linha temporal</p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Integração com Chart.js em desenvolvimento
-                </p>
-              </div>
+            <div className="h-64">
+              <Line data={priceChartData} options={priceChartOptions} />
             </div>
           </CardContent>
         </Card>
@@ -244,20 +422,14 @@ const MarketAnalysis = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center bg-gradient-to-br from-primary/10 to-orange-400/10 rounded-lg border border-white/10">
-              <div className="text-center">
-                <Calendar className="h-12 w-12 text-primary mx-auto mb-4" />
-                <p className="text-muted-foreground">Análise sazonal</p>
-                <p className="text-sm text-muted-foreground mt-2">
-                  Padrões mensais e trimestrais
-                </p>
-              </div>
+            <div className="h-64">
+              <Chart type="bar" data={seasonChartData} options={seasonChartOptions} />
             </div>
           </CardContent>
         </Card>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MarketAnalysis;
+export default MarketAnalysis
