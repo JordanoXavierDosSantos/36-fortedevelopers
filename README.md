@@ -24,4 +24,4 @@ yarn
 yarn dev
 ```
 
-O frontend estará disponível em http://localhost:3001 e a API em http://localhost:8000. ```
+O frontend estará disponível em http://localhost:8080 e a API em http://localhost:8000. ```
