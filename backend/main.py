@@ -13,15 +13,8 @@ class ImovelInput(BaseModel):
     banheiros: int
     garagem: int
 
-# Dataset público simulado (mockado como exemplo)
-data = {
-    "area": [800, 1000, 1200, 1500, 1800, 2000],
-    "quartos": [2, 3, 3, 4, 4, 5],
-    "banheiros": [1, 1, 2, 2, 3, 3],
-    "garagem": [1, 2, 2, 2, 3, 3],
-    "preco": [150000, 180000, 210000, 250000, 290000, 320000]
-}
-df = pd.DataFrame(data)
+# Dataset público
+df = pd.read_csv("dataset_imoveis.csv")
 
 # Treina o modelo de regressão linear
 X = df[["area", "quartos", "banheiros", "garagem"]]
@@ -36,5 +29,5 @@ def prever_preco(imovel: ImovelInput):
     preco_previsto = model.predict(entrada)[0]
     return {
         "preco_sugerido": round(preco_previsto, 2),
-        "detalhe": f"Baseado em {len(df)} imóveis do dataset mockado."
+        "detalhe": f"Baseado em {len(df)} imóveis do dataset."
     }
