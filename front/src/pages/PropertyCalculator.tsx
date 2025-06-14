@@ -37,57 +37,52 @@ const PropertyCalculator = () => {
   const [saleResult, setSaleResult] = useState(null);
   const [rentResult, setRentResult] = useState(null);
 
-  const calculateSalePrice = () => {
+  const calculateSalePrice = async () => {
     const area = parseFloat(saleData.area);
     const neighborhood = saleData.neighborhood;
 
-    console.log('Estrutura enviada para API (venda):', {
-      ...saleData,
-      area: area,
-      bedrooms: Number(saleData.bedrooms),
-      bathrooms: Number(saleData.bathrooms),
-      parking: Number(saleData.parking),
-      type: 'sale'
-    });
+    const payload = {
+      area,
+      quartos: Number(saleData.bedrooms),
+      banheiros: Number(saleData.bathrooms),
+      garagem: Number(saleData.parking),
+    };
 
-    if (!area || !neighborhood) {
+    console.log('Estrutura enviada para API (venda):', payload);
+
+    try {
+      const response = await fetch('http://localhost:8000/prever_preco', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro na requisição');
+      }
+
+      const data = await response.json();
+      setSaleResult({
+        estimatedPrice: data.preco_sugerido,
+        minPrice: data.preco_sugerido,
+        maxPrice: data.preco_sugerido,
+        pricePerSqm: 9999,
+        confidence: 85
+      });
+      toast({
+        title: "Cálculo realizado!",
+        description: "Estimativa de preço calculada com sucesso"
+      });
+    } catch (error) {
+      console.error('Erro ao chamar a API:', error);
       toast({
         title: "Erro na calculadora",
         description: "Preencha todos os campos obrigatórios (área e bairro)",
         variant: "destructive"
       });
-      return;
     }
-
-    let basePrice = 8500 * area; 
-    
-
-    const bedroomMultiplier = Math.max(1, parseInt(saleData.bedrooms || '0') * 0.1);
-    const bathroomMultiplier = Math.max(1, parseInt(saleData.bathrooms || '0') * 0.05);
-    const parkingMultiplier = Math.max(1, parseInt(saleData.parking || '0') * 0.08);
-    
-    basePrice *= (1 + bedroomMultiplier + bathroomMultiplier + parkingMultiplier);
-    
-
-    if (saleData.condition === 'new') basePrice *= 1.15;
-    else if (saleData.condition === 'renovated') basePrice *= 1.08;
-    else if (saleData.condition === 'needs-renovation') basePrice *= 0.85;
-    
-    const minPrice = basePrice * 0.9;
-    const maxPrice = basePrice * 1.1;
-    
-    setSaleResult({
-      estimatedPrice: basePrice,
-      minPrice,
-      maxPrice,
-      pricePerSqm: basePrice / area,
-      confidence: 85
-    });
-
-    toast({
-      title: "Cálculo realizado!",
-      description: "Estimativa de preço calculada com sucesso"
-    });
   };
 
   const calculateRentPrice = () => {
