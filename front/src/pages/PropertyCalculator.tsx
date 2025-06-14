@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -133,7 +132,6 @@ const PropertyCalculator = () => {
       <Tabs defaultValue="sale" className="space-y-6">
         <TabsList className="grid w-full grid-cols-2 bg-muted/50">
           <TabsTrigger value="sale">Calculadora de Venda</TabsTrigger>
-          <TabsTrigger value="rent">Calculadora de Aluguel</TabsTrigger>
         </TabsList>
 
         <TabsContent value="sale" className="space-y-6">
