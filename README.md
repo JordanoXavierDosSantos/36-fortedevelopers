@@ -1,5 +1,12 @@
 # PrecifAI
 
+## Requisitos
+
+- **Node.js** versão >= 18.0.0
+- **Yarn** (ou npm)
+- **Python** versão >= 3.8
+- **pip** (gerenciador de pacotes Python)
+
 ## Como rodar o projeto
 
 Abra **2 terminais** e execute os comandos abaixo:
