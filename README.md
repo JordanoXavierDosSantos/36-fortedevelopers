@@ -1,4 +1,4 @@
-# boilerplate-code-race
+# PrecifAI
 
 ## Como rodar o projeto
 
