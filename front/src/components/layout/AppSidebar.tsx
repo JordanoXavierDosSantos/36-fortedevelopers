@@ -34,11 +34,6 @@ const menuItems = [
     url: "/calculator",
     icon: Calculator,
   },
-  {
-    title: "Histórico de Trades",
-    url: "/trades",
-    icon: History,
-  },
 ];
 
 export function AppSidebar() {
