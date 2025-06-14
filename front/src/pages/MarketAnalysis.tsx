@@ -103,10 +103,35 @@ const monthLabels = [
   'Nov',
   'Dez'
 ]
-const monthlySales = [80, 70, 100, 110, 130, 140, 120, 115, 150, 160, 170, 190]
+const monthlySales = [
+  80, 
+  110,
+  120,  
+  105,  
+  95,  
+  75,   
+  85,  
+  130,
+  125,  
+  110,  
+  90,   
+  60   
+];
+
 const monthlyPrices = [
-  8300, 8350, 8450, 8600, 8700, 8800, 8950, 9000, 9150, 9300, 9450, 9600
-]
+  2000,
+  3550, 
+  3500, 
+  2600, 
+  5150, 
+  3200, 
+  2700, 
+  2400, 
+  2100,
+  1900, 
+  2000, 
+  1850  
+];
 const seasonChartData = {
   labels: monthLabels,
   datasets: [
@@ -192,50 +217,50 @@ const MarketAnalysis = () => {
     { range: 'Acima R$ 5M', percentage: 3, count: 83 }
   ]
 
-  const neighborhoods = [
-    {
-      name: 'Vila Olímpia',
-      avgPrice: 'R$ 12.500',
-      volume: 234,
-      trend: 'up',
-      change: '+8.2%'
-    },
-    {
-      name: 'Jardins',
-      avgPrice: 'R$ 15.200',
-      volume: 189,
-      trend: 'up',
-      change: '+3.1%'
-    },
-    {
-      name: 'Moema',
-      avgPrice: 'R$ 9.800',
-      volume: 312,
-      trend: 'down',
-      change: '-2.5%'
-    },
-    {
-      name: 'Brooklin',
-      avgPrice: 'R$ 8.900',
-      volume: 278,
-      trend: 'up',
-      change: '+12.3%'
-    },
-    {
-      name: 'Pinheiros',
-      avgPrice: 'R$ 11.400',
-      volume: 198,
-      trend: 'up',
-      change: '+5.7%'
-    },
-    {
-      name: 'Itaim Bibi',
-      avgPrice: 'R$ 13.100',
-      volume: 167,
-      trend: 'up',
-      change: '+6.8%'
-    }
-  ]
+ const neighborhoods = [
+  {
+    name: 'Centro',
+    avgPrice: 'R$ 5.362',
+    volume: 280,
+    trend: 'up',
+    change: '+4.5%'
+  },
+  {
+    name: 'Camobi',
+    avgPrice: 'R$ 3.723',
+    volume: 350,
+    trend: 'up',
+    change: '+5.2%'
+  },
+  {
+    name: 'Nossa Senhora das Dores',
+    avgPrice: 'R$ 5.140',
+    volume: 210,
+    trend: 'up',
+    change: '+3.8%'
+  },
+  {
+    name: 'Menino Jesus',
+    avgPrice: 'R$ 4.800',
+    volume: 190,
+    trend: 'stable',
+    change: '+1.5%'
+  },
+  {
+    name: 'Nossa Senhora Medianeira',
+    avgPrice: 'R$ 4.900',
+    volume: 220,
+    trend: 'up',
+    change: '+2.9%'
+  },
+  {
+    name: 'São José',
+    avgPrice: 'R$ 4.500',
+    volume: 170,
+    trend: 'up',
+    change: '+6.1%'
+  }
+];
 
   return (
     <div className="p-6 space-y-6">
@@ -252,9 +277,7 @@ const MarketAnalysis = () => {
               <SelectValue placeholder="Selecione a região" />
             </SelectTrigger>
             <SelectContent className="bg-card border-white/10">
-              <SelectItem value="sao-paulo">São Paulo - SP</SelectItem>
-              <SelectItem value="rio-janeiro">Rio de Janeiro - RJ</SelectItem>
-              <SelectItem value="belo-horizonte">Belo Horizonte - MG</SelectItem>
+              <SelectItem value="sao-paulo">Santa Maria - RS</SelectItem>
             </SelectContent>
           </Select>
           <Select value={selectedPeriod} onValueChange={setSelectedPeriod}>

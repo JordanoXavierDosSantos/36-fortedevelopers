@@ -7,14 +7,12 @@ import { Link } from 'react-router-dom';
 const Dashboard = () => {
   return (
     <div className="p-6 space-y-6">
-      {/* Header */}
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold text-foreground">Bem-vindo ao PrecifAI</h1>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Plataforma inteligente para análise e gestão do mercado imobiliário
         </p>
         
-        {/* CTA Principal */}
         <div className="mt-8">
           <Link to="/calculator">
             <Button size="lg" className="btn-primary text-lg px-8 py-4 h-auto">
@@ -28,7 +26,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="glass-card border-white/10">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -91,8 +88,7 @@ const Dashboard = () => {
         </Card>
       </div>
 
-      {/* Quick Actions */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Link to="/market" className="group">
           <Card className="glass-card border-white/10 hover-lift cursor-pointer">
             <CardHeader>
@@ -116,20 +112,6 @@ const Dashboard = () => {
               </CardTitle>
               <CardDescription>
                 Estime valores de venda e locação para imóveis
-              </CardDescription>
-            </CardHeader>
-          </Card>
-        </Link>
-
-        <Link to="/trades" className="group">
-          <Card className="glass-card border-white/10 hover-lift cursor-pointer">
-            <CardHeader>
-              <CardTitle className="text-foreground flex items-center gap-2 group-hover:text-primary transition-colors">
-                <TrendingUp className="h-5 w-5" />
-                Histórico de Trades
-              </CardTitle>
-              <CardDescription>
-                Acompanhe transações e operações realizadas
               </CardDescription>
             </CardHeader>
           </Card>

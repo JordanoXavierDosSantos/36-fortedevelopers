@@ -97,7 +97,7 @@ const PropertyCalculator = () => {
       </header>
 
       <Tabs defaultValue="sale" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-2 bg-muted/50">
+        <TabsList className="grid w-full grid-cols-1 bg-muted/50">
           <TabsTrigger value="sale">Calculadora de Venda</TabsTrigger>
         </TabsList>
 
