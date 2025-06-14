@@ -2,33 +2,25 @@
 
 ## Como rodar o projeto
 
-Abra **3 terminais** e execute os comandos abaixo:
+Abra **2 terminais** e execute os comandos abaixo:
 
-### 1. Subir o banco de dados (MySQL)
-
-No primeiro terminal:
-
-```sh
-cd backend
-yarn dev:docker
-```
-
-### 2. Subir a API
+### 1. Subir a API
 
 No segundo terminal:
 
 ```sh
-cd backend
-yarn dev:api
+pip install fastapi uvicorn scikit-learn pandas numpy
+uvicorn main:app --reload
 ```
 
-### 3. Subir o frontend
+### 2. Subir o frontend
 
 No terceiro terminal:
 
 ```sh
 cd frontend
+yarn
 yarn dev
 ```
 
-O frontend estará disponível em http://localhost:3001 e a API em http://localhost:8080. ```
+O frontend estará disponível em http://localhost:3001 e a API em http://localhost:8000. ```
