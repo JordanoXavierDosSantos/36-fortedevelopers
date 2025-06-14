@@ -102,9 +102,9 @@ const PropertyCalculator = () => {
         </TabsList>
 
         <TabsContent value="sale" className="space-y-6">
-          {/* --------------- FORM & RESULT --------------- */}
+
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-            {/* ---------- CARD: FORM ---------- */}
+
             <Card className="glass-card border-white/10">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
@@ -128,7 +128,6 @@ const PropertyCalculator = () => {
               </CardContent>
             </Card>
 
-            {/* ---------- CARD: RESULT ---------- */}
             <Card className="glass-card border-white/10 h-fit self-start">
               <CardHeader>
                 <CardTitle className="text-foreground flex items-center gap-2">
