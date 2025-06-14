@@ -144,11 +144,10 @@ const TradeHistory = () => {
         </div>
         <Button onClick={exportData} className="btn-primary flex items-center gap-2">
           <Download className="h-4 w-4" />
-          Exportar CSV
+          Exportar PDF
         </Button>
       </div>
 
-      {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <Card className="glass-card border-white/10">
           <CardContent className="p-4">
