@@ -1,9 +1,0 @@
-node_modules
-.database
-.idea
-yarn-error.log
-built
-.docker
-terraform/.terraform*
-synchronizeDB.ts
-coverage
