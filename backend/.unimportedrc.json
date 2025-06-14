@@ -1,0 +1,10 @@
+{
+  "entry": ["src/api/server.ts", "src/tests/**/*.{js,ts}"],
+  "extensions": [".ts", ".js"],
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "./src/DataSource.ts",
+    "**/*.d.ts",
+    "**/DataSource.ts"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "image": "node:16",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+}

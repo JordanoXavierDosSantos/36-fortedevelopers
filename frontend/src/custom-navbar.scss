@@ -1,0 +1,65 @@
+@import "./variables";
+
+$sidebar-bg-color: #2f3137;
+$sidebar-color: #ffffff !default;
+$highlight-color: darken($sidebar-color, 10%) !default;
+$icon-bg-color: $sidebar-bg-color !default;
+$submenu-bg-color: lighten($sidebar-bg-color, 3%) !default;
+$submenu-bg-color-collapsed: $sidebar-bg-color !default;
+
+@import "~react-pro-sidebar/dist/scss/styles.scss";
+
+.pro-sidebar {
+  ::-webkit-scrollbar {
+    width: 6px;
+    background-color: $sidebar-bg-color;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: $sidebar-bg-color;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: lighten($sidebar-bg-color, 15%);
+    border-radius: 100px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: lighten($sidebar-bg-color, 20%);
+  }
+
+  .pro-menu {
+    &.shaped {
+      .pro-menu-item {
+        font-family: "Inter", sans-serif;
+        font-size: 13.5px !important;
+        font-weight: 400;
+        padding-top: 5px;
+
+        > .pro-inner-item {
+          > .pro-icon-wrapper {
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+  }
+
+  .collapsed-border {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: $sidebar-bg-color;
+    width: 18px;
+    right: 0;
+  }
+}
+
+// Remove scroll when collapsed
+.pro-sidebar.collapsed {
+  > .pro-sidebar-inner {
+    > .pro-sidebar-layout {
+      overflow: hidden;
+    }
+  }
+}
